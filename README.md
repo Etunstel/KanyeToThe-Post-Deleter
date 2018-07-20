@@ -5,7 +5,7 @@
 A Python script for mass-deleting all (deletable) posts from your account. Non-deletable posts will have their titles and OP message overwritten. 
 
 
-Status: The basic functionality should be working currently, but it still needs additional testing. Add your user credentials in the "login_payload" variable in the login() function before running. Currently has a high time delay between requests for safety. 
+Status: The basic functionality should be working currently, but it still needs additional testing. Add your user credentials in the "login_payload" variable in the login() function before running. Currently has a high time delay between HTTP requests for safety. 
 
 TODO:
 
