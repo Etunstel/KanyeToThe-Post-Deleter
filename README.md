@@ -9,11 +9,10 @@ Status: The basic functionality should be working currently, but it still needs 
 
 TODO:
 
-1. Add a simple GUI
-2. Ensure proper behavior on an account with 0 posts
-3. Add ability to export URLS of non-deletable posts 
-4. Add ability to choose custom placeholder text for edited posts
-5. ???
+1. Ensure proper behavior on an account with 0 posts
+2. Add ability to export URLS of non-deletable posts 
+3. Add ability to choose custom placeholder text for edited posts
+4. ???
 
 
 
