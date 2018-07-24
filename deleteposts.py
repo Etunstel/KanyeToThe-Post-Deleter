@@ -209,7 +209,7 @@ def collect_posts():
 				collected_posts.append(topic_id + ":" + msg_id)
 				num_collected +=1;
 
-		if (num_collected < 19):
+		if (num_collected < 18):
 			start += num_collected
 			end_reached = True
 		else:
@@ -292,7 +292,7 @@ def login(user, pwrd):
 
 def logout(session_verification):
 	result = session.get(KTT_URL)
-	
+
 	logout_headers = DEFAULT_HEADERS;
 	logout_headers['Referer'] = KTT_URL + "/forum/index.php"
 	session_id = session_verification.split("=")[1]
