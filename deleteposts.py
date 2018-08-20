@@ -283,6 +283,7 @@ def login(user, pwrd):
 		allow_redirects=False,
 		timeout= TIMEOUT
 	)
+	
 
 	if(result.status_code != 302):
 		print("Failed to Log in.");
