@@ -284,7 +284,6 @@ def login(user, pwrd):
 		timeout= TIMEOUT
 	)
 	
-
 	if(result.status_code != 302):
 		print("Failed to Log in.");
 		error_msg = get_login_error(result.text)
