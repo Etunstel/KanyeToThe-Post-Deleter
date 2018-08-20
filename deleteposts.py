@@ -22,6 +22,7 @@ DEFAULT_HEADERS = {
 	"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36",
 }
 
+TIMEOUT = 30 # Default HTTP Request timeout
 STANDARD_DELAY = 5 # Delay between HTTP requests 
 REPLACEMENT_TITLE =  "Removed"
 REPLACEMENT_MESSAGE = "Removed"
@@ -119,7 +120,8 @@ def edit_post(topic_id, msg_id, session_verification):
 			"post": (None, "submit")
 			},
 	headers = edit_headers,
-	allow_redirects=False
+	allow_redirects=False,
+	timeout= TIMEOUT
 	)
 
 	if(result.status_code != 302): 
@@ -149,7 +151,8 @@ def delete_post(topic_id, msg_id, session_verification):
 	result = session.post(
 		deletion_link,
 		headers = deletion_headers,
-		allow_redirects=False
+		allow_redirects=False,
+		timeout= TIMEOUT
 	)
 
 	if(result.status_code != 302): 
@@ -185,7 +188,7 @@ def collect_posts():
 	while(not(end_reached)):
 		print("Collecting Page " + str(page) + "...")
 
-		result = session.get(POSTS_URL + "start=" + str(start))
+		result = session.get(POSTS_URL + "start=" + str(start), timeout= TIMEOUT)
 
 		soup = BeautifulSoup(result.text, "html.parser")
 		posts = soup.find_all("div", class_="category topicindex") # find all posts on this page
@@ -277,7 +280,8 @@ def login(user, pwrd):
 		LOGIN_URL,
 		data = login_payload,
 		headers = login_headers,
-		allow_redirects=False
+		allow_redirects=False,
+		timeout= TIMEOUT
 	)
 
 	if(result.status_code != 302):
@@ -291,7 +295,7 @@ def login(user, pwrd):
 		return True
 
 def logout(session_verification):
-	result = session.get(KTT_URL)
+	result = session.get(KTT_URL, timeout= TIMEOUT)
 
 	logout_headers = DEFAULT_HEADERS;
 	logout_headers['Referer'] = KTT_URL + "/forum/index.php"
@@ -301,7 +305,8 @@ def logout(session_verification):
 	result = session.get(
 		logout_url,
 		headers = logout_headers,
-		allow_redirects = False
+		allow_redirects = False,
+		timeout= TIMEOUT
 	)
 
 	if(result.status_code != 302):
@@ -335,7 +340,7 @@ session.mount('http://', adapter)
 session.mount('https://', adapter)
 session.headers = DEFAULT_HEADERS
 
-session.get(KTT_URL)
+session.get(KTT_URL, timeout= TIMEOUT)
 
 
 logged_in = False
@@ -356,7 +361,7 @@ while(not(logged_in)):
 session_verification, collected_posts = collect_posts()
 
 if(collected_posts == []):
-	print("Either this account has no posts, or . Logging out...")
+	print("This account has no posts. Logging out...")
 	logout(session_verification)
 else:
 	cont = input("Continue and delete posts? (yes/no): ").lower()
