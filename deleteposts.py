@@ -334,7 +334,7 @@ def create_list_file(title, lst):
 # --------------------------------------Main Script----------------------------------------
 
 session = requests.Session()
-retry = Retry(connect=3, backoff_factor=0.5)
+retry = Retry(connect=5, backoff_factor=0.5, status_forcelist=[ 500, 502, 503, 504 ])
 adapter = HTTPAdapter(max_retries=retry)
 session.mount('http://', adapter)
 session.mount('https://', adapter)
